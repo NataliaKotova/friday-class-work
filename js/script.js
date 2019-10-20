@@ -75,21 +75,71 @@ function replaceWord() {
 // tosearch a given element in the array and to sort the elements in descending order and display it to the user. 
 // For all the operations provide meaningful messages whether succeeded or failed, and what is the output if succeeded and reason why it failed if known
 
-// function takeData() {
-//     var input = document.getElementById("input").value;
-// }
-var fruits = ["Apple", "Banana", "Kiwi"];
 
-// console.log(input);
-document.getElementById("initialArray").innerHTML += fruits;
+var fruits = ["orange", "mandarin", "pineapple"];
+
+document.getElementById("output").innerHTML = "Fruits: " + fruits;
 
 function add () {
-    // var fruits = ["Apple", "Banana", "Kiwi"];
-    var input = document.getElementById("input").value;
+    var input = (document.getElementById("input").value).toLowerCase();
     fruits.push(input);
-    document.getElementById("initialArray").innerHTML = fruits;
+    document.getElementById("output").innerHTML = "Fruits: " + fruits;
     return fruits;
 }
 
+function removeFruit() {
+    var input = (document.getElementById("input").value).toLowerCase();
+    for (var i = 0; i < fruits.length; i++) {
+        if(input === fruits[i]) {
+            var index = i;
+           fruits.splice(index,1);
+        }
+        document.getElementById("output").innerHTML = "Here is the array of fruits after you removed " + input + ": " + fruits;
+    }
+    return fruits;
+}
+
+function searchFruitIndexOf() {
+    var input = (document.getElementById("input").value).toLowerCase();
+    //indexOf will return index if element is found and will return -1 if element not found
+    var index = fruits.indexOf(input);
+    if (index < 0 ) {
+        document.getElementById("output").innerHTML = input + " is not found in the list";
+    }
+    else {
+        document.getElementById("output").innerHTML = input + " is found in the list";
+    }
+}
+
+function searchFruit() {
+    var input = (document.getElementById("input").value).toLowerCase();
+    var result = input + " is not found in the list";
+    
+    for (var i = 0; i < fruits.length; i++) {
+        if(input === fruits[i]) {
+            result = input + " is found in the list";
+            break;
+        }
+    }
+    
+    document.getElementById("output").innerHTML = result;
+    return fruits;
+}
+
+function sortArray() {
+    var sortedFruits = fruits.sort();
+    document.getElementById("output").innerHTML = "Here is the sorted array: " + sortedFruits;
+    return sortedFruits;
+}
+
+function clear() {
+    document.getElementById("input").value = "";
+}
+
 document.getElementById("add").addEventListener("click", add);
+document.getElementById("clear").addEventListener("click", clear);
+document.getElementById("remove").addEventListener("click", removeFruit);
+document.getElementById("search").addEventListener("click", searchFruit);
+document.getElementById("searchTwo").addEventListener("click", searchFruitIndexOf);
+document.getElementById("sort").addEventListener("click", sortArray);
 
